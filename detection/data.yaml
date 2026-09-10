@@ -1,0 +1,6 @@
+train: C:\Users\ramse\OneDrive\Desktop\Senior Project Work\dataset\images\train
+val: C:\Users\ramse\OneDrive\Desktop\Senior Project Work\dataset\images\val
+
+
+nc: 1
+names: ['solar panel']
