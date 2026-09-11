@@ -49,15 +49,29 @@ The project compares object detection and semantic segmentation through quantita
 
 ### YOLOv5
 
-The trained YOLOv5 models produced strong hotspot detection results and were able to detect multiple hotspots within thermal images.
+The trained YOLOv5 models produced hotspot detections in thermal images and were evaluated using standard object-detection metrics.
 
-The YOLOv5m model showed better performance in cases where hotspots were close together, while YOLOv5s offered a lighter alternative.
+The YOLOv5m model showed better performance in cases where hotspots were close together, while YOLOv5s provided a lighter alternative.
 
 ### U-Net
 
 The U-Net model was developed for pixel-level hotspot segmentation.
 
 The current repository includes the trained U-Net model weights. Evaluation and deployment are still being refined, so numerical segmentation metrics are not reported here unless they can be independently reproduced from the published implementation and evaluation procedure.
+
+## Example Outputs
+
+### YOLOv5 Detection
+
+![YOLOv5 Detection 1](examples/yolo_validation_1.jpg)
+
+![YOLOv5 Detection 2](examples/yolo_validation_2.jpg)
+
+### U-Net Segmentation
+
+![U-Net Result 1](examples/unet_result_1.png)
+
+![U-Net Result 2](examples/unet_result_2.png)
 
 ## Current Status
 
@@ -95,7 +109,10 @@ solar-panel-hotspot-detection/
 ├── examples/
 │   ├── yolo_validation_1.jpg
 │   ├── yolo_validation_2.jpg
-│   └── yolo_validation_3.jpg
+│   ├── yolo_validation_3.jpg
+│   ├── unet_result_1.png
+│   ├── unet_result_2.png
+│   └── unet_result_3.png
 │
 ├── results/
 │   ├── confusion_matrix.png
