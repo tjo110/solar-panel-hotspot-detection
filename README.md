@@ -1,26 +1,32 @@
 # AI-Based Hotspot Detection in Solar Panels
 
-An AI-based computer vision project for detecting thermal hotspots in solar panels using infrared thermal imagery.
+A computer vision project for detecting thermal hotspots in solar panels using infrared thermal imagery.
 
 ## Overview
 
-This project investigates two different deep learning approaches for automated solar-panel hotspot detection:
+This project investigates two deep learning approaches for automated solar-panel hotspot detection:
 
 - **YOLOv5** for object detection
 - **U-Net** for semantic segmentation
 
-The goal was to compare the two approaches and understand their strengths and limitations for solar-panel inspection.
+The objective was to compare the two approaches and understand their strengths and limitations for solar-panel inspection.
 
 ## Dataset
 
-The training dataset consisted of **501 thermal images** of solar panels. The images were processed into grayscale and manually annotated for hotspot regions.
+The training dataset consisted of **501 thermal images** of solar panels.
 
-The annotations were converted into:
+The images were:
 
-- YOLO-format labels for object detection
-- Binary segmentation masks for U-Net
+- Converted to grayscale
+- Resized to **416 × 416** pixels
+- Manually annotated for hotspot regions
 
-The training images were resized to **416 × 416** pixels.
+The annotations were converted into two formats:
+
+- **YOLO-format bounding-box labels** for object detection
+- **Binary segmentation masks** for U-Net
+
+The project also used separate thermal images for testing to examine model behavior on previously unseen images.
 
 ## Models
 
@@ -31,47 +37,51 @@ Two YOLOv5 variants were investigated:
 - **YOLOv5s (Small)**
 - **YOLOv5m (Medium)**
 
-The YOLOv5 models were trained for hotspot object detection using bounding-box annotations.
+The models were trained to detect hotspot regions using bounding boxes.
 
-The YOLOv5m model showed stronger performance in scenarios involving clustered hotspots and provided a good balance between detection performance and model complexity.
+The YOLOv5m model generally performed better when multiple hotspots were close together, while YOLOv5s provided a lighter alternative.
 
 ### U-Net
 
-A custom **U-Net** model was trained for pixel-level semantic segmentation of thermal hotspot regions.
+A custom **U-Net** model was trained for semantic segmentation.
 
-Unlike object detection, segmentation produces a pixel-level mask representing the detected hotspot area.
-
-The U-Net approach was particularly useful for analyzing the shape and spatial extent of hotspot regions.
+Instead of predicting bounding boxes, U-Net produces a pixel-level mask representing the detected hotspot regions. This provides more detailed information about the shape and spatial extent of the detected anomalies.
 
 ## Results
 
-The project compares object detection and semantic segmentation through quantitative evaluation and visual inspection.
+The project evaluated the models using quantitative metrics and visual inspection.
 
 ### YOLOv5
 
-The trained YOLOv5 models produced hotspot detections in thermal images and were evaluated using standard object-detection metrics.
+The YOLOv5 models successfully detected hotspot regions in thermal images, including images containing multiple hotspots.
 
-The YOLOv5m model showed better performance in cases where hotspots were close together, while YOLOv5s provided a lighter alternative.
+The repository includes the trained YOLOv5 model and representative detection results.
 
 ### U-Net
 
-The U-Net model was developed for pixel-level hotspot segmentation.
+The U-Net model was trained for pixel-level hotspot segmentation.
 
-The current repository includes the trained U-Net model weights. Evaluation and deployment are still being refined, so numerical segmentation metrics are not reported here unless they can be independently reproduced from the published implementation and evaluation procedure.
+Representative segmentation outputs are included in the repository together with the trained model weights.
+
+> **Note:** The U-Net evaluation pipeline is still being refined, so numerical segmentation metrics are not reported here unless they can be independently reproduced from the published implementation.
 
 ## Example Outputs
 
 ### YOLOv5 Detection
 
-![YOLOv5 Detection 1](examples/yolo_validation_1.jpg)
+![YOLOv5 Result 1](examples/yolo_result_1.jpg)
 
-![YOLOv5 Detection 2](examples/yolo_validation_2.jpg)
+![YOLOv5 Result 2](examples/yolo_result_2.jpg)
+
+![YOLOv5 Result 3](examples/yolo_result_3.jpg)
 
 ### U-Net Segmentation
 
 ![U-Net Result 1](examples/unet_result_1.png)
 
 ![U-Net Result 2](examples/unet_result_2.png)
+
+![U-Net Result 3](examples/unet_result_3.png)
 
 ## Current Status
 
@@ -85,10 +95,10 @@ The models have **not yet been deployed**.
 
 ## Future Work
 
-Planned future improvements include:
+Planned improvements include:
 
 - Expanding the dataset to improve model generalization
-- Further refining the segmentation model and evaluation pipeline
+- Further refining the U-Net training and evaluation pipeline
 - Investigating larger YOLOv5 architectures
 - Deploying the selected model as an API
 - Integrating the system with thermal cameras
@@ -107,9 +117,14 @@ solar-panel-hotspot-detection/
 │   └── trained_unet2.pth
 │
 ├── examples/
-│   ├── yolo_validation_1.jpg
-│   ├── yolo_validation_2.jpg
-│   ├── yolo_validation_3.jpg
+│   ├── yolo_result_1.jpg
+│   ├── yolo_result_2.jpg
+│   ├── yolo_result_3.jpg
+│   ├── yolo_result_4.jpg
+│   ├── yolo_result_5.jpg
+│   ├── yolo_result_6.jpg
+│   ├── yolo_result_7.jpg
+│   ├── yolo_result_8.jpg
 │   ├── unet_result_1.png
 │   ├── unet_result_2.png
 │   └── unet_result_3.png
